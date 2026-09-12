@@ -57,6 +57,19 @@ raw html
 Text with <b>inline</b> tag
 wraps here.
 
+PDF extraction leaves hy-
+phenation at line ends, keeps Nord-
+Süd and 2019-
+2020 together, keeps Vor-
+und Nachteile suspended, and a dash -
+on its own stays a dash.
+
+A word cut at a page break ends the paragraph mid-
+
+word and continues after the blank line. A hyphen-
+
+Capital start after a blank line stays a new paragraph.
+
 [ref]: https://example.com
 Last paragraph line one
 line two

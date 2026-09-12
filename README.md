@@ -58,7 +58,7 @@ xcodebuild -project Octothorpe.xcodeproj -scheme Octothorpe -configuration Relea
 
 ## Markdown cleanup
 
-MarkItDown hard-wraps paragraphs, one line per source line. Markdown renders such single line breaks as spaces, so they carry no meaning. The tidy step (`src/octothorpe/tidy.py`) joins those lines and collapses runs of blank lines to one. It leaves code blocks, tables, headings, lists, block quotes, HTML blocks, hard line breaks (two trailing spaces or a backslash), horizontal rules, link definitions and front matter untouched. It is on by default; turn it off with `--no-tidy`, the `tidy` key in the config, or the toggle in the app's settings. Golden fixtures: `tests/fixtures/tidy_input.md` and `tidy_expected.md`.
+MarkItDown hard-wraps paragraphs, one line per source line. Markdown renders such single line breaks as spaces, so they carry no meaning. The tidy step (`src/octothorpe/tidy.py`) joins those lines and collapses runs of blank lines to one. When a line ends in a hyphenated word fragment (`hy-` / `phenation`), the join also drops the hyphen. Before a capital letter or a digit the hyphen stays as part of a compound (`Nord-Süd`, `2019-2020`), and suspended hyphens (`Vor- und Nachteile`) stay too. A word cut at a page or column break has a blank line inside it; when the next paragraph starts with a lower-case letter, the two paragraphs are joined. It leaves code blocks, tables, headings, lists, block quotes, HTML blocks, hard line breaks (two trailing spaces or a backslash), horizontal rules, link definitions and front matter untouched. It is on by default; turn it off with `--no-tidy`, the `tidy` key in the config, or the toggle in the app's settings. Golden fixtures: `tests/fixtures/tidy_input.md` and `tidy_expected.md`.
 
 ## CLI
 

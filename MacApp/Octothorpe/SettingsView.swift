@@ -38,7 +38,7 @@ struct SettingsView: View {
             }
             Section("Markdown cleanup") {
                 Toggle("Join wrapped lines", isOn: $settings.tidy)
-                Text("Removes line breaks that Markdown would not render: hard-wrapped paragraph lines are joined and repeated blank lines collapse to one. Code, tables, lists and hard breaks stay as they are.")
+                Text("Removes line breaks that Markdown would not render: hard-wrapped paragraph lines are joined, hyphenation at line ends is removed, and repeated blank lines collapse to one. Code, tables, lists and hard breaks stay as they are.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }

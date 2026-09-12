@@ -48,7 +48,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--tidy",
         action=argparse.BooleanOptionalAction,
         default=None,
-        help="join hard-wrapped lines and collapse blank lines (default: on, or value from config)",
+        help="join hard-wrapped lines, remove hyphenation at line ends and collapse blank lines (default: on, or value from config)",
     )
     parser.add_argument(
         "--verbose",
