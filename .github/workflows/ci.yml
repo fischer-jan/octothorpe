@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests (${{ matrix.os }}, Python ${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python: ["3.10", "3.11", "3.12", "3.13"]
+        include:
+          - os: macos-latest
+            python: "3.12"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python }}
+          enable-cache: true
+      # --locked fails if uv.lock does not match pyproject.toml, so a stale lock
+      # never passes CI. --all-extras installs OCR, GUI and Tesseract bridges too,
+      # so a dependency update that conflicts with them is caught here.
+      - run: uv sync --locked --all-extras
+      - run: uv run pytest -q
+      - name: Smoke test the CLI on a real PDF
+        run: |
+          uv run octothorpe tests/fixtures/hello.pdf -o out --force
+          test -s out/hello.md
+          cat out/hello.md
+
+  mac-app:
+    name: Build the Mac app
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          cd MacApp
+          xcodebuild \
+            -project Octothorpe.xcodeproj \
+            -scheme Octothorpe \
+            -configuration Release \
+            -derivedDataPath ./DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Octothorpe.app
+          path: MacApp/DerivedData/Build/Products/Release/Octothorpe.app
+          if-no-files-found: error
+
+  # Dependabot pull requests (MarkItDown and the other dependencies) merge on
+  # their own once every job above is green. The merge does not start another
+  # CI run on main; the checks already ran on the pull request itself.
+  auto-merge:
+    name: Merge Dependabot update
+    if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]'
+    needs: [test, mac-app]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - run: gh pr merge --squash "$PR_URL"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}

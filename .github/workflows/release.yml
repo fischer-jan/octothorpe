@@ -1,0 +1,50 @@
+name: Release
+
+# Push a tag like v0.2.0 to publish a GitHub release with the Python wheel,
+# the source archive and an unsigned build of the Mac app.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+
+      - name: Check that the tag matches pyproject.toml
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(uv version --short)"
+          if [ "$tag" != "$version" ]; then
+            echo "tag v$tag does not match pyproject version $version" >&2
+            exit 1
+          fi
+
+      - run: uv sync --locked --all-extras
+      - run: uv run pytest -q
+      - run: uv build
+
+      - name: Build the Mac app
+        run: |
+          cd MacApp
+          xcodebuild \
+            -project Octothorpe.xcodeproj \
+            -scheme Octothorpe \
+            -configuration Release \
+            -derivedDataPath ./DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+          ditto -c -k --keepParent \
+            DerivedData/Build/Products/Release/Octothorpe.app \
+            ../dist/Octothorpe-macOS-unsigned.zip
+
+      - run: gh release create "$GITHUB_REF_NAME" --generate-notes dist/*
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

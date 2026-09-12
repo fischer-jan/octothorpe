@@ -1,5 +1,7 @@
 # Octothorpe
 
+[![CI](https://github.com/fischer-jan/octothorpe/actions/workflows/ci.yml/badge.svg)](https://github.com/fischer-jan/octothorpe/actions/workflows/ci.yml)
+
 Octothorpe turns documents into Markdown. Drop a PDF, a Word file, or a scanned image on the window, and you get a `.md` file next to your other notes.
 
 It is a small layer on top of [Microsoft MarkItDown](https://github.com/microsoft/markitdown). MarkItDown does the actual conversion. Octothorpe adds the parts that make it useful day to day:
@@ -125,6 +127,18 @@ xcodebuild -project Octothorpe.xcodeproj -scheme Octothorpe -configuration Relea
 ```
 
 To check the UI from a terminal, set `OCTOTHORPE_SNAPSHOT=/path/out.png`. The app renders its window to that PNG and quits. Add `OCTOTHORPE_DEMO=1` for sample rows in every state, or `OCTOTHORPE_CONVERT_TO=/dir` to convert the test fixtures first. The app icon comes from `scripts/make-icon.swift`.
+
+### CI and releases
+
+Every push and pull request runs the tests on Linux (Python 3.10 to 3.13) and macOS, converts a real PDF with the CLI, and builds the Mac app. Dependabot checks `uv.lock` every morning. A new MarkItDown release arrives as its own pull request; the other Python packages arrive as one grouped pull request. Those pull requests merge on their own once CI is green, so MarkItDown updates land without anyone touching the repo.
+
+To publish a release, set the version in `pyproject.toml`, then push a matching tag:
+
+```bash
+git tag v0.2.0 && git push origin v0.2.0
+```
+
+The release workflow checks that the tag matches the version, runs the tests, and attaches the wheel, the source archive, and an unsigned build of the Mac app to a GitHub release.
 
 ## License
 
