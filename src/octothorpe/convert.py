@@ -7,14 +7,14 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
-from mdconvert.ocr import run_ocr, should_ocr
-from mdconvert.sanitize import (
+from octothorpe.ocr import run_ocr, should_ocr
+from octothorpe.sanitize import (
     output_markdown_path,
     sanitize_input,
     sanitize_output_dir,
 )
 
-log = logging.getLogger("mdconvert")
+log = logging.getLogger("octothorpe")
 
 
 class ConvertError(RuntimeError):
@@ -58,7 +58,7 @@ def convert_file(user_path: str | Path, options: ConvertOptions) -> Path:
         if should_ocr(source, options.ocr_mode):
             log.info("OCR %s (%s)", source.name, options.ocr_engine)
             text = run_ocr(source, engine=options.ocr_engine)
-            tmp_dir = tempfile.TemporaryDirectory(prefix="mdconvert-")
+            tmp_dir = tempfile.TemporaryDirectory(prefix="octothorpe-")
             sidecar = Path(tmp_dir.name) / f"{source.stem}.txt"
             sidecar.write_text(text or "", encoding="utf-8")
             convert_source = sidecar

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build the SwiftUI Octothorpe.app (the mdconvert GUI) and copy it for Spotlight / Launchpad,
+# Build the SwiftUI Octothorpe.app (the octothorpe GUI) and copy it for Spotlight / Launchpad,
 # plus a CLI shim. The app shells out to the project venv.
 # Re-run after moving the repo.
 #
@@ -8,7 +8,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-CLI_BIN="$ROOT/.venv/bin/mdconvert"
+CLI_BIN="$ROOT/.venv/bin/octothorpe"
 
 if [[ ! -x "$CLI_BIN" ]]; then
   echo "✗ Missing $CLI_BIN" >&2
@@ -17,15 +17,15 @@ if [[ ! -x "$CLI_BIN" ]]; then
   exit 1
 fi
 
-SUPPORT="$HOME/Library/Application Support/MdConvert"
+SUPPORT="$HOME/Library/Application Support/Octothorpe"
 mkdir -p "$SUPPORT"
 printf '%s\n' "$ROOT" > "$SUPPORT/project_root.txt"
 
 echo "▸ Building SwiftUI app"
 cd "$ROOT/MacApp"
 xcodebuild \
-  -project MdConvert.xcodeproj \
-  -scheme MdConvert \
+  -project Octothorpe.xcodeproj \
+  -scheme Octothorpe \
   -configuration Release \
   -derivedDataPath ./DerivedData \
   build
@@ -43,7 +43,7 @@ else
   mkdir -p "$APPS"
 fi
 APP="$APPS/Octothorpe.app"
-rm -rf "$APPS/MdConvert.app"   # the app was called MdConvert before 2026-09-12
+rm -rf "$APPS/Octothorpe.app"   # the app was called Octothorpe before 2026-09-12
 
 echo "▸ Installing bundle → $APP"
 rm -rf "$APP"
@@ -52,7 +52,7 @@ ditto "$APP_SRC" "$APP"
 chmod -R go-w "$APP"
 
 if command -v codesign >/dev/null 2>&1; then
-  codesign --force --sign - --identifier de.janfischer.mdconvert "$APP" || true
+  codesign --force --sign - --identifier de.janfischer.octothorpe "$APP" || true
 fi
 
 touch "$APP"
@@ -62,14 +62,14 @@ command -v mdimport >/dev/null 2>&1 && mdimport "$APP" || true
 
 BIN_DIR="$HOME/.local/bin"
 mkdir -p "$BIN_DIR"
-ln -sfn "$CLI_BIN" "$BIN_DIR/mdconvert"
-cat > "$BIN_DIR/mdconvert-gui" <<LAUNCH
+ln -sfn "$CLI_BIN" "$BIN_DIR/octothorpe"
+cat > "$BIN_DIR/octothorpe-gui" <<LAUNCH
 #!/bin/bash
 exec open -a "$APP"
 LAUNCH
-chmod 755 "$BIN_DIR/mdconvert-gui"
+chmod 755 "$BIN_DIR/octothorpe-gui"
 
 echo "✓ Octothorpe installed → $APP"
 echo "  Launch: open -a Octothorpe   or Spotlight: Octothorpe"
-echo "  CLI:    $BIN_DIR/mdconvert  (ensure ~/.local/bin is on PATH)"
+echo "  CLI:    $BIN_DIR/octothorpe  (ensure ~/.local/bin is on PATH)"
 echo "  Re-run this script if you move the project folder."

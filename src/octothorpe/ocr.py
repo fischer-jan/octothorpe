@@ -5,9 +5,9 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
-from mdconvert.sanitize import ALLOWED_EXTENSIONS
+from octothorpe.sanitize import ALLOWED_EXTENSIONS
 
-log = logging.getLogger("mdconvert.ocr")
+log = logging.getLogger("octothorpe.ocr")
 
 OCR_MODES = ("auto", "always", "never")
 OCR_ENGINES = ("rapidocr", "tesseract")
@@ -119,7 +119,7 @@ def _ocr_image_rapidocr(image) -> str:
         from rapidocr import RapidOCR
     except ImportError as exc:
         raise OcrError(
-            "RapidOCR is not installed. Run: pip install 'mdconvert[ocr]'"
+            "RapidOCR is not installed. Run: pip install 'octothorpe[ocr]'"
         ) from exc
     engine = RapidOCR()
     result = engine(image)
@@ -132,7 +132,7 @@ def _ocr_image_tesseract(image) -> str:
         from PIL import Image
     except ImportError as exc:
         raise OcrError(
-            "pytesseract is not installed. Run: pip install 'mdconvert[tesseract]'"
+            "pytesseract is not installed. Run: pip install 'octothorpe[tesseract]'"
         ) from exc
     if not isinstance(image, Image.Image):
         with Image.open(image) as opened:
@@ -153,7 +153,7 @@ def _iter_pdf_page_images(path: Path):
         import pypdfium2 as pdfium
     except ImportError as exc:
         raise OcrError(
-            "pypdfium2 is not installed. Run: pip install 'mdconvert[ocr]'"
+            "pypdfium2 is not installed. Run: pip install 'octothorpe[ocr]'"
         ) from exc
     doc = pdfium.PdfDocument(str(path))
     try:

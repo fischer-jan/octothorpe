@@ -18,7 +18,7 @@ enum CLIRunner {
         guard fm.isExecutableFile(atPath: cli.path) else {
             return ConvertResult(
                 ok: false,
-                message: "mdconvert CLI not found at \(cli.path)"
+                message: "octothorpe CLI not found at \(cli.path)"
             )
         }
 

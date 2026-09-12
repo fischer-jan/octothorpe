@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from mdconvert.ocr import pdf_needs_ocr, should_ocr
+from octothorpe.ocr import pdf_needs_ocr, should_ocr
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

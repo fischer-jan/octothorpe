@@ -1,4 +1,4 @@
-# mdconvert
+# octothorpe
 
 Convert documents to Markdown. The tool always sanitizes the input, then it may run OCR, then it calls [Microsoft MarkItDown](https://github.com/microsoft/markitdown).
 
@@ -14,7 +14,7 @@ pip install -e ".[dev,ocr]"
 
 - `dev` — pytest
 - `ocr` — RapidOCR, ONNX Runtime, pypdfium2, Pillow
-- `gui` — optional. Only needed if you run the leftover Tk window (`mdconvert-gui` in the venv)
+- `gui` — optional. Only needed if you run the leftover Tk window (`octothorpe-gui` in the venv)
 
 Tesseract is optional. Install the binary yourself, then:
 
@@ -24,11 +24,11 @@ pip install -e ".[tesseract]"
 
 ## macOS app: Octothorpe (Spotlight)
 
-The product UI is a native SwiftUI app in `MacApp/`, named **Octothorpe** after the `#` sign. It calls `.venv/bin/mdconvert`. It does not reimplement OCR or MarkItDown.
+The product UI is a native SwiftUI app in `MacApp/`, named **Octothorpe** after the `#` sign. It calls `.venv/bin/octothorpe`. It does not reimplement OCR or MarkItDown.
 
 The look is "ink & amber": warm dark paper, an amber accent, a big drop zone, and one card per file with a type badge and its status. A finished row shows the written `.md` name; hover it for a **Reveal** button that opens the file in Finder. The app icon comes from `scripts/make-icon.swift` (re-run it and copy the PNGs into `Assets.xcassets/AppIcon.appiconset` to change it).
 
-Debug hooks for checking the UI from a terminal, without screen recording: `MDCONVERT_SNAPSHOT=/path.png` renders the window to a PNG and quits; add `MDCONVERT_DEMO=1` for sample rows in every state, or `MDCONVERT_CONVERT_TO=/dir` to really convert the test fixtures first.
+Debug hooks for checking the UI from a terminal, without screen recording: `OCTOTHORPE_SNAPSHOT=/path.png` renders the window to a PNG and quits; add `OCTOTHORPE_DEMO=1` for sample rows in every state, or `OCTOTHORPE_CONVERT_TO=/dir` to really convert the test fixtures first.
 
 After the venv install above:
 
@@ -39,9 +39,9 @@ bash scripts/install-mac.sh
 This builds the SwiftUI app, then installs:
 
 - `/Applications/Octothorpe.app` (or `~/Applications` if `/Applications` is not writable) — double-click or Spotlight: **Octothorpe**
-- `~/.local/bin/mdconvert` → the project `.venv` CLI
-- `~/.local/bin/mdconvert-gui` → opens Octothorpe
-- `~/Library/Application Support/MdConvert/project_root.txt` — path to this repo so the app finds the venv
+- `~/.local/bin/octothorpe` → the project `.venv` CLI
+- `~/.local/bin/octothorpe-gui` → opens Octothorpe
+- `~/Library/Application Support/Octothorpe/project_root.txt` — path to this repo so the app finds the venv
 
 Re-run `scripts/install-mac.sh` if you move this folder.
 
@@ -53,14 +53,14 @@ To build without installing:
 
 ```bash
 cd MacApp
-xcodebuild -project MdConvert.xcodeproj -scheme MdConvert -configuration Release -derivedDataPath ./DerivedData build
+xcodebuild -project Octothorpe.xcodeproj -scheme Octothorpe -configuration Release -derivedDataPath ./DerivedData build
 ```
 
 ## CLI
 
 ```bash
-mdconvert INPUT...
-python -m mdconvert INPUT...
+octothorpe INPUT...
+python -m octothorpe INPUT...
 ```
 
 Flags:
@@ -76,8 +76,8 @@ Flags:
 Examples:
 
 ```bash
-mdconvert report.pdf -o ~/Documents/md
-mdconvert scan.png notes.docx --ocr auto --force
+octothorpe report.pdf -o ~/Documents/md
+octothorpe scan.png notes.docx --ocr auto --force
 ```
 
 The CLI prints each written markdown path. It continues after a per-file error and exits `1` if any file failed.
@@ -98,9 +98,9 @@ The drop zone stays on screen. When files are in the list, it stays compact abov
 
 The status bar at the bottom is always on. It shows Ready, progress (`Converting 2 of 5…`), a done line (`Converted 5 files`), or an error summary. The app does not open a success dialog when a run finishes. Convert errors stay on the row and in the status bar.
 
-Settings are stored in `~/.config/mdconvert/config.json`. The app passes `-o`, `--ocr`, `--ocr-engine`, and `--force` on each CLI run. Convert overwrites existing `.md` files in the GUI so a second drop of the same file does not stall.
+Settings are stored in `~/.config/octothorpe/config.json`. The app passes `-o`, `--ocr`, `--ocr-engine`, and `--force` on each CLI run. Convert overwrites existing `.md` files in the GUI so a second drop of the same file does not stall.
 
-The Python command `mdconvert-gui` still opens the old Tk window. Do not use that as the product UI.
+The Python command `octothorpe-gui` still opens the old Tk window. Do not use that as the product UI.
 
 ## Auto OCR
 

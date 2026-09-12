@@ -1,2 +1,2 @@
-Hello from mdconvert
+Hello from octothorpe
 This is a tiny convert-smoke fixture.

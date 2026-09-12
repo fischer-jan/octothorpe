@@ -1,4 +1,4 @@
-"""Persist GUI/CLI defaults under ~/.config/mdconvert/config.json."""
+"""Persist GUI/CLI defaults under ~/.config/octothorpe/config.json."""
 
 from __future__ import annotations
 
@@ -6,9 +6,9 @@ import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
-from mdconvert.ocr import OCR_ENGINES, OCR_MODES
+from octothorpe.ocr import OCR_ENGINES, OCR_MODES
 
-CONFIG_DIR = Path.home() / ".config" / "mdconvert"
+CONFIG_DIR = Path.home() / ".config" / "octothorpe"
 CONFIG_PATH = CONFIG_DIR / "config.json"
 
 

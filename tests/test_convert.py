@@ -2,9 +2,9 @@ from pathlib import Path
 
 import pytest
 
-from mdconvert.convert import ConvertError, ConvertOptions, convert_file
-from mdconvert.ocr import run_ocr
-from mdconvert.sanitize import SanitizeError
+from octothorpe.convert import ConvertError, ConvertOptions, convert_file
+from octothorpe.ocr import run_ocr
+from octothorpe.sanitize import SanitizeError
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -17,7 +17,7 @@ def test_convert_txt_smoke(tmp_path: Path) -> None:
     )
     assert dest == tmp_path / "hello.md"
     text = dest.read_text(encoding="utf-8")
-    assert "Hello from mdconvert" in text
+    assert "Hello from octothorpe" in text
 
 
 def test_convert_refuses_overwrite(tmp_path: Path) -> None:
@@ -42,7 +42,7 @@ def test_ocr_sidecar_then_markitdown(
         assert engine == "rapidocr"
         return "OCR LINE ONE\nOCR LINE TWO"
 
-    monkeypatch.setattr("mdconvert.convert.run_ocr", fake_ocr)
+    monkeypatch.setattr("octothorpe.convert.run_ocr", fake_ocr)
     dest = convert_file(
         src,
         ConvertOptions(output_dir=tmp_path, ocr_mode="auto", ocr_engine="rapidocr"),
@@ -75,6 +75,6 @@ def test_convert_error_wraps_markitdown(
     def boom(_path: Path) -> str:
         raise RuntimeError("markitdown down")
 
-    monkeypatch.setattr("mdconvert.convert._markitdown_text", boom)
+    monkeypatch.setattr("octothorpe.convert._markitdown_text", boom)
     with pytest.raises(ConvertError, match="markitdown down"):
         convert_file(src, ConvertOptions(output_dir=tmp_path, ocr_mode="never"))

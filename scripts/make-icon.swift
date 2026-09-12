@@ -1,4 +1,4 @@
-// Renders the MdConvert app icon (1024 px PNG). Usage: swift scripts/make-icon.swift out.png
+// Renders the Octothorpe app icon (1024 px PNG). Usage: swift scripts/make-icon.swift out.png
 import AppKit
 
 let out = CommandLine.arguments[1]

@@ -3,13 +3,13 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mdconvert"
+name = "octothorpe"
 version = "0.1.0"
 description = "Convert documents to Markdown with optional OCR and Microsoft MarkItDown"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "mdconvert" }]
+authors = [{ name = "octothorpe" }]
 dependencies = [
     "markitdown[pdf,docx,pptx,xlsx,xls]>=0.1.0",
     "pypdf>=4.0",
@@ -27,8 +27,8 @@ ocr = [
 tesseract = ["pytesseract>=0.3", "pillow>=10.0"]
 
 [project.scripts]
-mdconvert = "mdconvert.cli:main"
-mdconvert-gui = "mdconvert.gui:main"
+octothorpe = "octothorpe.cli:main"
+octothorpe-gui = "octothorpe.gui:main"
 
 [project.urls]
 Homepage = "https://github.com/microsoft/markitdown"

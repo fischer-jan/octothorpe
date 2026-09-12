@@ -2,7 +2,7 @@ import AppKit
 import SwiftUI
 
 @main
-struct MdConvertApp: App {
+struct OctothorpeApp: App {
     @State private var session = ConvertSession()
     @State private var settings = SettingsStore()
 
@@ -43,17 +43,17 @@ struct MdConvertApp: App {
     }
 }
 
-/// Debug aid: MDCONVERT_SNAPSHOT=/path/out.png renders the window to a PNG and quits.
-/// MDCONVERT_DEMO=1 first fills the queue with sample rows in every state;
-/// MDCONVERT_CONVERT_TO=/dir really converts the test fixtures into that folder.
+/// Debug aid: OCTOTHORPE_SNAPSHOT=/path/out.png renders the window to a PNG and quits.
+/// OCTOTHORPE_DEMO=1 first fills the queue with sample rows in every state;
+/// OCTOTHORPE_CONVERT_TO=/dir really converts the test fixtures into that folder.
 /// Needs no screen-recording permission; used to check the UI from a terminal.
 enum Snapshot {
     @MainActor
     static func runIfRequested(session: ConvertSession) {
         let env = ProcessInfo.processInfo.environment
-        guard let out = env["MDCONVERT_SNAPSHOT"] else { return }
+        guard let out = env["OCTOTHORPE_SNAPSHOT"] else { return }
         Task { @MainActor in
-            if env["MDCONVERT_DEMO"] != nil {
+            if env["OCTOTHORPE_DEMO"] != nil {
                 let root = ProjectRoot.resolve().appendingPathComponent("tests/fixtures")
                 var items = ["hello.pdf", "hello.txt", "tiny.png", "blank.pdf"].map { QueueItem(url: root.appendingPathComponent($0)) }
                 if items.count == 4 {
@@ -64,7 +64,7 @@ enum Snapshot {
                 session.items = items
                 session.footer = .converting(current: 2, total: 4)
             }
-            if let outDir = env["MDCONVERT_CONVERT_TO"] {
+            if let outDir = env["OCTOTHORPE_CONVERT_TO"] {
                 // Real run: convert the fixtures into outDir, then snapshot the result.
                 let settings = SettingsStore()
                 settings.outputDir = outDir

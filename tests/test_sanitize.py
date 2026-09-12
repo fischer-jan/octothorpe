@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from mdconvert.sanitize import (
+from octothorpe.sanitize import (
     MAX_BYTES,
     SanitizeError,
     output_markdown_path,
@@ -60,7 +60,7 @@ def test_reject_missing(tmp_path: Path) -> None:
 
 
 def test_reject_oversize(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr("mdconvert.sanitize.MAX_BYTES", 8)
+    monkeypatch.setattr("octothorpe.sanitize.MAX_BYTES", 8)
     src = tmp_path / "big.txt"
     src.write_text("0123456789", encoding="utf-8")
     with pytest.raises(SanitizeError, match="bytes"):

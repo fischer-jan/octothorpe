@@ -13,7 +13,7 @@ struct AppConfigFile: Codable, Equatable, Sendable {
     static func configURL() -> URL {
         FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent(".config", isDirectory: true)
-            .appendingPathComponent("mdconvert", isDirectory: true)
+            .appendingPathComponent("octothorpe", isDirectory: true)
             .appendingPathComponent("config.json")
     }
 

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A1B2C3D4E5F60718293A002"
-               BuildableName = "MdConvert.app"
-               BlueprintName = "MdConvert"
-               ReferencedContainer = "container:MdConvert.xcodeproj">
+               BuildableName = "Octothorpe.app"
+               BlueprintName = "Octothorpe"
+               ReferencedContainer = "container:Octothorpe.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A1B2C3D4E5F60718293A002"
-            BuildableName = "MdConvert.app"
-            BlueprintName = "MdConvert"
-            ReferencedContainer = "container:MdConvert.xcodeproj">
+            BuildableName = "Octothorpe.app"
+            BlueprintName = "Octothorpe"
+            ReferencedContainer = "container:Octothorpe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,9 +61,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A1B2C3D4E5F60718293A002"
-            BuildableName = "MdConvert.app"
-            BlueprintName = "MdConvert"
-            ReferencedContainer = "container:MdConvert.xcodeproj">
+            BuildableName = "Octothorpe.app"
+            BlueprintName = "Octothorpe"
+            ReferencedContainer = "container:Octothorpe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

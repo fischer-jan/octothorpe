@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		7A1B2C3D4E5F60718293A003 /* MdConvert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MdConvert.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1B2C3D4E5F60718293A003 /* Octothorpe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Octothorpe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		7A1B2C3D4E5F60718293A004 /* MdConvert */ = {
+		7A1B2C3D4E5F60718293A004 /* Octothorpe */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MdConvert;
+			path = Octothorpe;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		7A1B2C3D4E5F60718293A005 = {
 			isa = PBXGroup;
 			children = (
-				7A1B2C3D4E5F60718293A004 /* MdConvert */,
+				7A1B2C3D4E5F60718293A004 /* Octothorpe */,
 				7A1B2C3D4E5F60718293A006 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		7A1B2C3D4E5F60718293A006 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7A1B2C3D4E5F60718293A003 /* MdConvert.app */,
+				7A1B2C3D4E5F60718293A003 /* Octothorpe.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7A1B2C3D4E5F60718293A002 /* MdConvert */ = {
+		7A1B2C3D4E5F60718293A002 /* Octothorpe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A1B2C3D4E5F60718293A021 /* Build configuration list for PBXNativeTarget "MdConvert" */;
+			buildConfigurationList = 7A1B2C3D4E5F60718293A021 /* Build configuration list for PBXNativeTarget "Octothorpe" */;
 			buildPhases = (
 				7A1B2C3D4E5F60718293A010 /* Sources */,
 				7A1B2C3D4E5F60718293A011 /* Frameworks */,
@@ -61,11 +61,11 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				7A1B2C3D4E5F60718293A004 /* MdConvert */,
+				7A1B2C3D4E5F60718293A004 /* Octothorpe */,
 			);
-			name = MdConvert;
-			productName = MdConvert;
-			productReference = 7A1B2C3D4E5F60718293A003 /* MdConvert.app */;
+			name = Octothorpe;
+			productName = Octothorpe;
+			productReference = 7A1B2C3D4E5F60718293A003 /* Octothorpe.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -83,7 +83,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7A1B2C3D4E5F60718293A020 /* Build configuration list for PBXProject "MdConvert" */;
+			buildConfigurationList = 7A1B2C3D4E5F60718293A020 /* Build configuration list for PBXProject "Octothorpe" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -97,7 +97,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7A1B2C3D4E5F60718293A002 /* MdConvert */,
+				7A1B2C3D4E5F60718293A002 /* Octothorpe */,
 			);
 		};
 /* End PBXProject section */
@@ -187,7 +187,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.janfischer.mdconvert;
+				PRODUCT_BUNDLE_IDENTIFIER = de.janfischer.octothorpe;
 				PRODUCT_NAME = Octothorpe;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -218,7 +218,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.janfischer.mdconvert;
+				PRODUCT_BUNDLE_IDENTIFIER = de.janfischer.octothorpe;
 				PRODUCT_NAME = Octothorpe;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -229,7 +229,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7A1B2C3D4E5F60718293A020 /* Build configuration list for PBXProject "MdConvert" */ = {
+		7A1B2C3D4E5F60718293A020 /* Build configuration list for PBXProject "Octothorpe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A1B2C3D4E5F60718293A022 /* Debug */,
@@ -238,7 +238,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A1B2C3D4E5F60718293A021 /* Build configuration list for PBXNativeTarget "MdConvert" */ = {
+		7A1B2C3D4E5F60718293A021 /* Build configuration list for PBXNativeTarget "Octothorpe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A1B2C3D4E5F60718293A024 /* Debug */,

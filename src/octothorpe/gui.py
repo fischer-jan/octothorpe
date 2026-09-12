@@ -11,10 +11,10 @@ from pathlib import Path
 from tkinter import filedialog, ttk
 from urllib.parse import unquote, urlparse
 
-from mdconvert.config import AppConfig, load_config, save_config
-from mdconvert.convert import ConvertError, ConvertOptions, convert_file
-from mdconvert.ocr import OCR_ENGINES, OCR_MODES
-from mdconvert.sanitize import SanitizeError
+from octothorpe.config import AppConfig, load_config, save_config
+from octothorpe.convert import ConvertError, ConvertOptions, convert_file
+from octothorpe.ocr import OCR_ENGINES, OCR_MODES
+from octothorpe.sanitize import SanitizeError
 
 try:
     from tkinterdnd2 import DND_FILES, TkinterDnD
@@ -189,7 +189,7 @@ class QueueItem:
 class MdconvertApp:
     def __init__(self, root: tk.Tk) -> None:
         self.root = root
-        self.root.title("MdConvert")
+        self.root.title("Octothorpe")
         self.root.minsize(560, 440)
         self.root.geometry("640x560")
         self.config = load_config()
@@ -306,7 +306,7 @@ class MdconvertApp:
         compact = bool(self.items)
         if not HAS_DND:
             title = "Add files to convert"
-            hint = "Drag-and-drop needs tkinterdnd2. Use Add, or pip install 'mdconvert[gui]'."
+            hint = "Drag-and-drop needs tkinterdnd2. Use Add, or pip install 'octothorpe[gui]'."
             return title, hint
         if compact:
             return "Drop files to convert", "Drop starts convert"

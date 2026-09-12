@@ -1,4 +1,4 @@
-"""Command-line entry: mdconvert INPUT..."""
+"""Command-line entry: octothorpe INPUT..."""
 
 from __future__ import annotations
 
@@ -7,17 +7,17 @@ import logging
 import sys
 from pathlib import Path
 
-from mdconvert.config import load_config
-from mdconvert.convert import ConvertError, ConvertOptions, convert_file
-from mdconvert.ocr import OCR_ENGINES, OCR_MODES
-from mdconvert.sanitize import SanitizeError
+from octothorpe.config import load_config
+from octothorpe.convert import ConvertError, ConvertOptions, convert_file
+from octothorpe.ocr import OCR_ENGINES, OCR_MODES
+from octothorpe.sanitize import SanitizeError
 
-log = logging.getLogger("mdconvert")
+log = logging.getLogger("octothorpe")
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="mdconvert",
+        prog="octothorpe",
         description="Convert documents to Markdown (optional OCR, then MarkItDown).",
     )
     parser.add_argument("inputs", nargs="+", help="input files")

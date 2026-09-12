@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from mdconvert.config import AppConfig, load_config, save_config
+from octothorpe.config import AppConfig, load_config, save_config
 
 
 def test_load_missing_returns_defaults(tmp_path: Path) -> None:
