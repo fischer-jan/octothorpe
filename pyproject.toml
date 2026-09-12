@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mdconvert"
+version = "0.1.0"
+description = "Convert documents to Markdown with optional OCR and Microsoft MarkItDown"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "mdconvert" }]
+dependencies = [
+    "markitdown[pdf,docx,pptx,xlsx,xls]>=0.1.0",
+    "pypdf>=4.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+gui = ["tkinterdnd2>=0.4"]
+ocr = [
+    "rapidocr>=2.0",
+    "onnxruntime>=1.16",
+    "pypdfium2>=4.0",
+    "pillow>=10.0",
+]
+tesseract = ["pytesseract>=0.3", "pillow>=10.0"]
+
+[project.scripts]
+mdconvert = "mdconvert.cli:main"
+mdconvert-gui = "mdconvert.gui:main"
+
+[project.urls]
+Homepage = "https://github.com/microsoft/markitdown"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
