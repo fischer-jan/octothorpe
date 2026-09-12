@@ -97,7 +97,9 @@ struct FileRowView: View {
                     }
                     .buttonStyle(.plain)
                     .help("Reveal the Markdown file in Finder")
-                    .transition(.opacity.combined(with: .move(edge: .trailing)))
+                    // Fade in with a short slide from the left, so the button
+                    // never passes under the checkmark to its right.
+                    .transition(.opacity.combined(with: .offset(x: -8)))
                 }
                 Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 15))
