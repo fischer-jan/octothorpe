@@ -133,3 +133,7 @@ PDF OCR renders pages with pypdfium2 (no Poppler). Image/PDF OCR writes a tempor
 source .venv/bin/activate
 pytest
 ```
+
+## License
+
+MIT. See `LICENSE`.

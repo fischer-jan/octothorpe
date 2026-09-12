@@ -1,7 +1,9 @@
 import Foundation
 
 enum ProjectRoot {
-    static let defaultPath = "/Users/jan/Projekte/octothorpe"
+    /// Used only when scripts/install-mac.sh has not written project_root.txt yet.
+    static let defaultPath = FileManager.default.homeDirectoryForCurrentUser
+        .appendingPathComponent("octothorpe").path
 
     static func resolve() -> URL {
         let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first

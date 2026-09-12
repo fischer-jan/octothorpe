@@ -9,7 +9,7 @@ description = "Convert documents to Markdown with optional OCR and Microsoft Mar
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "octothorpe" }]
+authors = [{ name = "Jan Fischer" }]
 dependencies = [
     "markitdown[pdf,docx,pptx,xlsx,xls]>=0.1.0",
     "pypdf>=4.0",
@@ -31,7 +31,9 @@ octothorpe = "octothorpe.cli:main"
 octothorpe-gui = "octothorpe.gui:main"
 
 [project.urls]
-Homepage = "https://github.com/microsoft/markitdown"
+Homepage = "https://github.com/fischer-jan/octothorpe"
+Repository = "https://github.com/fischer-jan/octothorpe"
+MarkItDown = "https://github.com/microsoft/markitdown"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
