@@ -7,7 +7,7 @@ struct MdConvertApp: App {
     @State private var settings = SettingsStore()
 
     var body: some Scene {
-        Window("MdConvert", id: "main") {
+        Window("Octothorpe", id: "main") {
             ContentView()
                 .environment(session)
                 .environment(settings)

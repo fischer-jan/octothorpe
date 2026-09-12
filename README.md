@@ -22,9 +22,9 @@ Tesseract is optional. Install the binary yourself, then:
 pip install -e ".[tesseract]"
 ```
 
-## macOS app (Spotlight)
+## macOS app: Octothorpe (Spotlight)
 
-The product UI is a native SwiftUI app in `MacApp/`. It calls `.venv/bin/mdconvert`. It does not reimplement OCR or MarkItDown.
+The product UI is a native SwiftUI app in `MacApp/`, named **Octothorpe** after the `#` sign. It calls `.venv/bin/mdconvert`. It does not reimplement OCR or MarkItDown.
 
 The look is "ink & amber": warm dark paper, an amber accent, a big drop zone, and one card per file with a type badge and its status. A finished row shows the written `.md` name; hover it for a **Reveal** button that opens the file in Finder. The app icon comes from `scripts/make-icon.swift` (re-run it and copy the PNGs into `Assets.xcassets/AppIcon.appiconset` to change it).
 
@@ -38,15 +38,15 @@ bash scripts/install-mac.sh
 
 This builds the SwiftUI app, then installs:
 
-- `/Applications/MdConvert.app` (or `~/Applications` if `/Applications` is not writable) — double-click or Spotlight: **MdConvert**
+- `/Applications/Octothorpe.app` (or `~/Applications` if `/Applications` is not writable) — double-click or Spotlight: **Octothorpe**
 - `~/.local/bin/mdconvert` → the project `.venv` CLI
-- `~/.local/bin/mdconvert-gui` → opens the SwiftUI app
+- `~/.local/bin/mdconvert-gui` → opens Octothorpe
 - `~/Library/Application Support/MdConvert/project_root.txt` — path to this repo so the app finds the venv
 
 Re-run `scripts/install-mac.sh` if you move this folder.
 
 ```bash
-open -a MdConvert
+open -a Octothorpe
 ```
 
 To build without installing:
@@ -84,7 +84,7 @@ The CLI prints each written markdown path. It continues after a per-file error a
 
 ## GUI
 
-The Mac app is SwiftUI. Open **MdConvert** from Spotlight, or `open -a MdConvert`. The CLI is unchanged.
+The Mac app is SwiftUI. Open **Octothorpe** from Spotlight, or `open -a Octothorpe`. The CLI is unchanged.
 
 The window converts documents **to** Markdown (PDF, Office, images, HTML, text, and the other allowed types). Markdown files are not queued in the app. The CLI still accepts them.
 

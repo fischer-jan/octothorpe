@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build the SwiftUI MdConvert.app and copy it for Spotlight / Launchpad,
+# Build the SwiftUI Octothorpe.app (the mdconvert GUI) and copy it for Spotlight / Launchpad,
 # plus a CLI shim. The app shells out to the project venv.
 # Re-run after moving the repo.
 #
@@ -30,7 +30,7 @@ xcodebuild \
   -derivedDataPath ./DerivedData \
   build
 
-APP_SRC="$ROOT/MacApp/DerivedData/Build/Products/Release/MdConvert.app"
+APP_SRC="$ROOT/MacApp/DerivedData/Build/Products/Release/Octothorpe.app"
 if [[ ! -d "$APP_SRC" ]]; then
   echo "✗ Build did not produce $APP_SRC" >&2
   exit 1
@@ -42,7 +42,8 @@ else
   APPS="$HOME/Applications"
   mkdir -p "$APPS"
 fi
-APP="$APPS/MdConvert.app"
+APP="$APPS/Octothorpe.app"
+rm -rf "$APPS/MdConvert.app"   # the app was called MdConvert before 2026-09-12
 
 echo "▸ Installing bundle → $APP"
 rm -rf "$APP"
@@ -68,7 +69,7 @@ exec open -a "$APP"
 LAUNCH
 chmod 755 "$BIN_DIR/mdconvert-gui"
 
-echo "✓ MdConvert installed → $APP"
-echo "  Launch: open -a MdConvert   or Spotlight: MdConvert"
+echo "✓ Octothorpe installed → $APP"
+echo "  Launch: open -a Octothorpe   or Spotlight: Octothorpe"
 echo "  CLI:    $BIN_DIR/mdconvert  (ensure ~/.local/bin is on PATH)"
 echo "  Re-run this script if you move the project folder."

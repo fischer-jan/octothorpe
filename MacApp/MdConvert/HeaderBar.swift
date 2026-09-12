@@ -79,7 +79,7 @@ struct Wordmark: View {
                 }
             }
             VStack(alignment: .leading, spacing: 1) {
-                Text("MdConvert")
+                Text("Octothorpe")
                     .font(.inkSerif(24))
                     .foregroundStyle(Ink.text)
                 HStack(spacing: 0) {

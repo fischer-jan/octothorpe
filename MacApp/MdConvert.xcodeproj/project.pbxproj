@@ -177,7 +177,7 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MdConvert;
+				INFOPLIST_KEY_CFBundleDisplayName = Octothorpe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHighResolutionCapable = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -188,7 +188,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.janfischer.mdconvert;
-				PRODUCT_NAME = MdConvert;
+				PRODUCT_NAME = Octothorpe;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -208,7 +208,7 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MdConvert;
+				INFOPLIST_KEY_CFBundleDisplayName = Octothorpe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHighResolutionCapable = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -219,7 +219,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.janfischer.mdconvert;
-				PRODUCT_NAME = MdConvert;
+				PRODUCT_NAME = Octothorpe;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
