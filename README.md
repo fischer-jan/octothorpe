@@ -26,6 +26,10 @@ pip install -e ".[tesseract]"
 
 The product UI is a native SwiftUI app in `MacApp/`. It calls `.venv/bin/mdconvert`. It does not reimplement OCR or MarkItDown.
 
+The look is "ink & amber": warm dark paper, an amber accent, a big drop zone, and one card per file with a type badge and its status. A finished row shows the written `.md` name; hover it for a **Reveal** button that opens the file in Finder. The app icon comes from `scripts/make-icon.swift` (re-run it and copy the PNGs into `Assets.xcassets/AppIcon.appiconset` to change it).
+
+Debug hooks for checking the UI from a terminal, without screen recording: `MDCONVERT_SNAPSHOT=/path.png` renders the window to a PNG and quits; add `MDCONVERT_DEMO=1` for sample rows in every state, or `MDCONVERT_CONVERT_TO=/dir` to really convert the test fixtures first.
+
 After the venv install above:
 
 ```bash

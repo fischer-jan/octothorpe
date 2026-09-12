@@ -3,8 +3,11 @@ import Foundation
 enum ConvertStatus: Equatable {
     case queued
     case converting
-    case done
+    case done(outputPath: String?)
     case failed(String)
+
+    var isDone: Bool { if case .done = self { return true }; return false }
+    var isFailed: Bool { if case .failed = self { return true }; return false }
 }
 
 struct QueueItem: Identifiable, Equatable {

@@ -7,8 +7,11 @@ struct ContentView: View {
 
     var body: some View {
         @Bindable var session = session
-        NavigationStack {
-            VStack(spacing: 12) {
+        ZStack {
+            InkBackground(busy: session.isBusy)
+            VStack(spacing: 14) {
+                HeaderBar()
+                    .padding(.top, 26)
                 DropZoneView(
                     hasFiles: !session.items.isEmpty,
                     isTargeted: $session.isDropTargeted,
@@ -16,59 +19,26 @@ struct ContentView: View {
                     onDropProviders: { session.ingestDropProviders($0, settings: settings) }
                 )
                 if !session.items.isEmpty {
-                    List(session.items) { item in
-                        FileRowView(item: item)
+                    ScrollView {
+                        LazyVStack(spacing: 6) {
+                            ForEach(Array(session.items.enumerated()), id: \.element.id) { index, item in
+                                FileRowView(item: item, index: index)
+                                    .transition(.opacity.combined(with: .move(edge: .top)))
+                            }
+                        }
+                        .padding(2)
                     }
-                    .listStyle(.inset)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.85), value: session.items.map(\.id))
                 }
-                FooterBar(footer: session.footer)
+                FooterBar(footer: session.footer, progress: session.progress, counts: session.counts)
             }
-            .padding(16)
-            .frame(minWidth: 520, minHeight: 420)
-            .toolbar {
-                ToolbarItem(placement: .navigation) {
-                    Button {
-                        session.chooseFiles(settings: settings)
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                    .help("Add files")
-                    .accessibilityLabel("Add files")
-                    .keyboardShortcut("o", modifiers: .command)
-                }
-                ToolbarItem(placement: .navigation) {
-                    Button {
-                        session.clear()
-                    } label: {
-                        Image(systemName: "trash")
-                    }
-                    .help("Clear list")
-                    .accessibilityLabel("Clear list")
-                    .disabled(!session.canClear)
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        Task { await session.convertQueued(using: settings) }
-                    } label: {
-                        Label("Convert", systemImage: "play.fill")
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .keyboardShortcut(.defaultAction)
-                    .help("Convert queued files")
-                    .accessibilityLabel("Convert queued files")
-                    .disabled(!session.canConvert)
-                }
-                ToolbarItem(placement: .automatic) {
-                    SettingsLink {
-                        Image(systemName: "gearshape")
-                    }
-                    .help("Settings")
-                    .accessibilityLabel("Settings")
-                }
-            }
-            .navigationTitle("MdConvert")
+            .padding(.horizontal, 22)
+            .padding(.bottom, 16)
         }
+        .preferredColorScheme(.dark)
+        .foregroundStyle(Ink.text)
+        .frame(minWidth: 640, minHeight: 480)
         .onDrop(of: [.fileURL], isTargeted: $session.isDropTargeted) { providers in
             session.ingestDropProviders(providers, settings: settings)
             return true
@@ -80,5 +50,5 @@ struct ContentView: View {
     ContentView()
         .environment(ConvertSession())
         .environment(SettingsStore())
-        .frame(width: 640, height: 560)
+        .frame(width: 720, height: 600)
 }

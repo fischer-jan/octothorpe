@@ -23,6 +23,16 @@ final class ConvertSession {
         !isBusy && !items.isEmpty
     }
 
+    var counts: (done: Int, failed: Int, queued: Int) {
+        (items.filter { $0.status.isDone }.count, items.filter { $0.status.isFailed }.count, queuedCount)
+    }
+
+    /// Fraction of the current run that is finished, nil when idle.
+    var progress: Double? {
+        guard case .converting(let current, let total) = footer, total > 0 else { return nil }
+        return Double(current - 1) / Double(total)
+    }
+
     func add(urls: [URL], startConvert: Bool, settings: SettingsStore) {
         var changed = false
         for url in urls {
@@ -38,7 +48,7 @@ final class ConvertSession {
                 continue
             }
             if let index = items.firstIndex(where: { $0.id == resolved.path }) {
-                if items[index].status == .done || failed(items[index]) {
+                if items[index].status.isDone || items[index].status.isFailed {
                     items[index].status = .queued
                     changed = true
                 }
@@ -68,8 +78,8 @@ final class ConvertSession {
         if pendingIDs.isEmpty { return }
 
         isBusy = true
-        var ok = newRun ? 0 : items.filter { $0.status == .done }.count
-        var failedCount = newRun ? 0 : items.filter { if case .failed = $0.status { return true }; return false }.count
+        var ok = newRun ? 0 : items.filter { $0.status.isDone }.count
+        var failedCount = newRun ? 0 : items.filter { $0.status.isFailed }.count
         let already = ok + failedCount
         let total = already + pendingIDs.count
         let config = settings.snapshot
@@ -82,7 +92,7 @@ final class ConvertSession {
             let result = await CLIRunner.convert(file: url, config: config)
             guard let latest = items.firstIndex(where: { $0.id == id }) else { continue }
             if result.ok {
-                items[latest].status = .done
+                items[latest].status = .done(outputPath: Self.outputPath(from: result.message))
                 ok += 1
             } else {
                 items[latest].status = .failed(result.message)
@@ -119,9 +129,11 @@ final class ConvertSession {
         }
     }
 
-    private func failed(_ item: QueueItem) -> Bool {
-        if case .failed = item.status { return true }
-        return false
+    /// The CLI prints each written Markdown path; take the last one.
+    static func outputPath(from stdout: String) -> String? {
+        stdout.split(whereSeparator: \.isNewline)
+            .map { $0.trimmingCharacters(in: .whitespaces) }
+            .last { $0.hasPrefix("/") && $0.lowercased().hasSuffix(".md") }
     }
 
     private static func loadFileURLs(from providers: [NSItemProvider]) async -> [URL] {
