@@ -7,16 +7,18 @@ final class SettingsStore {
     var outputDir: String
     var ocrMode: String
     var ocrEngine: String
+    var tidy: Bool
 
     init() {
         let loaded = AppConfigFile.load()
         outputDir = loaded.output_dir
         ocrMode = loaded.ocr
         ocrEngine = loaded.ocr_engine
+        tidy = loaded.tidy
     }
 
     var snapshot: AppConfigFile {
-        AppConfigFile(output_dir: outputDir, ocr: ocrMode, ocr_engine: ocrEngine)
+        AppConfigFile(output_dir: outputDir, ocr: ocrMode, ocr_engine: ocrEngine, tidy: tidy)
     }
 
     func persist() {
@@ -32,5 +34,6 @@ final class SettingsStore {
         outputDir = loaded.output_dir
         ocrMode = loaded.ocr
         ocrEngine = loaded.ocr_engine
+        tidy = loaded.tidy
     }
 }

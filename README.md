@@ -56,6 +56,10 @@ cd MacApp
 xcodebuild -project Octothorpe.xcodeproj -scheme Octothorpe -configuration Release -derivedDataPath ./DerivedData build
 ```
 
+## Markdown cleanup
+
+MarkItDown hard-wraps paragraphs, one line per source line. Markdown renders such single line breaks as spaces, so they carry no meaning. The tidy step (`src/octothorpe/tidy.py`) joins those lines and collapses runs of blank lines to one. It leaves code blocks, tables, headings, lists, block quotes, HTML blocks, hard line breaks (two trailing spaces or a backslash), horizontal rules, link definitions and front matter untouched. It is on by default; turn it off with `--no-tidy`, the `tidy` key in the config, or the toggle in the app's settings. Golden fixtures: `tests/fixtures/tidy_input.md` and `tidy_expected.md`.
+
 ## CLI
 
 ```bash
@@ -71,6 +75,7 @@ Flags:
 | `--ocr auto\|always\|never` | OCR mode. Default: `auto`. |
 | `--ocr-engine rapidocr\|tesseract` | OCR engine. Default: `rapidocr` (local, no system Tesseract). |
 | `--force` | Overwrite an existing `.md` file. |
+| `--tidy` / `--no-tidy` | Join hard-wrapped lines and collapse blank lines. Default: on, or `tidy` from config. |
 | `--verbose` | Debug logs. |
 
 Examples:

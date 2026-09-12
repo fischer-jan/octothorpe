@@ -17,6 +17,7 @@ class AppConfig:
     output_dir: str = ""
     ocr: str = "auto"
     ocr_engine: str = "rapidocr"
+    tidy: bool = True
 
 
 def _normalize(data: dict) -> AppConfig:
@@ -27,7 +28,10 @@ def _normalize(data: dict) -> AppConfig:
     if engine not in OCR_ENGINES:
         engine = "rapidocr"
     output_dir = str(data.get("output_dir") or "")
-    return AppConfig(output_dir=output_dir, ocr=ocr, ocr_engine=engine)
+    tidy = data.get("tidy", True)
+    if not isinstance(tidy, bool):
+        tidy = str(tidy).lower() not in ("false", "0", "no", "off")
+    return AppConfig(output_dir=output_dir, ocr=ocr, ocr_engine=engine, tidy=tidy)
 
 
 def load_config(path: Path | None = None) -> AppConfig:

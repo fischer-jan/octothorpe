@@ -36,12 +36,19 @@ struct SettingsView: View {
                 .pickerStyle(.radioGroup)
                 .labelsHidden()
             }
+            Section("Markdown cleanup") {
+                Toggle("Join wrapped lines", isOn: $settings.tidy)
+                Text("Removes line breaks that Markdown would not render: hard-wrapped paragraph lines are joined and repeated blank lines collapse to one. Code, tables, lists and hard breaks stay as they are.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            }
         }
         .formStyle(.grouped)
-        .frame(minWidth: 420, minHeight: 280)
+        .frame(minWidth: 460, minHeight: 360)
         .onChange(of: settings.outputDir) { _, _ in settings.persist() }
         .onChange(of: settings.ocrMode) { _, _ in settings.persist() }
         .onChange(of: settings.ocrEngine) { _, _ in settings.persist() }
+        .onChange(of: settings.tidy) { _, _ in settings.persist() }
         .onAppear { settings.reload() }
     }
 

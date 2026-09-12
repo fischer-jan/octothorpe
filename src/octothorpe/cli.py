@@ -45,6 +45,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="overwrite existing markdown files",
     )
     parser.add_argument(
+        "--tidy",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="join hard-wrapped lines and collapse blank lines (default: on, or value from config)",
+    )
+    parser.add_argument(
         "--verbose",
         action="store_true",
         help="print debug logs",
@@ -74,6 +80,7 @@ def main(argv: list[str] | None = None) -> int:
         ocr_mode=args.ocr or config.ocr,
         ocr_engine=args.ocr_engine or config.ocr_engine,
         force=args.force,
+        tidy=config.tidy if args.tidy is None else args.tidy,
     )
     failures = 0
     for item in args.inputs:

@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from octothorpe.ocr import run_ocr, should_ocr
+from octothorpe.tidy import tidy_markdown
 from octothorpe.sanitize import (
     output_markdown_path,
     sanitize_input,
@@ -27,6 +28,7 @@ class ConvertOptions:
     ocr_mode: str = "auto"
     ocr_engine: str = "rapidocr"
     force: bool = False
+    tidy: bool = True
 
 
 def _markitdown_text(source: Path) -> str:
@@ -64,6 +66,8 @@ def convert_file(user_path: str | Path, options: ConvertOptions) -> Path:
             convert_source = sidecar
         log.info("MarkItDown %s → %s", convert_source.name, dest)
         markdown = _markitdown_text(convert_source)
+        if options.tidy:
+            markdown = tidy_markdown(markdown)
         dest.write_text(markdown, encoding="utf-8")
     except ConvertError:
         raise

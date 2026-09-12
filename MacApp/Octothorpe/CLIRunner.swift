@@ -34,6 +34,9 @@ enum CLIRunner {
             "--ocr-engine", config.ocr_engine,
             "--force",
         ])
+        if !config.tidy {
+            args.append("--no-tidy")
+        }
         process.arguments = args
         process.currentDirectoryURL = ProjectRoot.resolve()
 

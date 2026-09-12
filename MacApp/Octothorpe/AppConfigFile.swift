@@ -4,11 +4,27 @@ struct AppConfigFile: Codable, Equatable, Sendable {
     var output_dir: String
     var ocr: String
     var ocr_engine: String
+    var tidy: Bool
+
+    init(output_dir: String, ocr: String, ocr_engine: String, tidy: Bool = true) {
+        self.output_dir = output_dir
+        self.ocr = ocr
+        self.ocr_engine = ocr_engine
+        self.tidy = tidy
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        output_dir = try c.decodeIfPresent(String.self, forKey: .output_dir) ?? ""
+        ocr = try c.decodeIfPresent(String.self, forKey: .ocr) ?? "auto"
+        ocr_engine = try c.decodeIfPresent(String.self, forKey: .ocr_engine) ?? "rapidocr"
+        tidy = try c.decodeIfPresent(Bool.self, forKey: .tidy) ?? true
+    }
 
     static let ocrModes = ["auto", "always", "never"]
     static let ocrEngines = ["rapidocr", "tesseract"]
 
-    static let `default` = AppConfigFile(output_dir: "", ocr: "auto", ocr_engine: "rapidocr")
+    static let `default` = AppConfigFile(output_dir: "", ocr: "auto", ocr_engine: "rapidocr", tidy: true)
 
     static func configURL() -> URL {
         FileManager.default.homeDirectoryForCurrentUser
@@ -42,7 +58,11 @@ struct AppConfigFile: Codable, Equatable, Sendable {
         } else {
             output = ""
         }
-        return AppConfigFile(output_dir: output, ocr: ocr, ocr_engine: engine)
+        let tidy: Bool
+        if let b = data["tidy"] as? Bool { tidy = b }
+        else if let str = data["tidy"] as? String { tidy = !["false", "0", "no", "off"].contains(str.lowercased()) }
+        else { tidy = true }
+        return AppConfigFile(output_dir: output, ocr: ocr, ocr_engine: engine, tidy: tidy)
     }
 
     func save() throws {
