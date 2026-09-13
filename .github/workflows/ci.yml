@@ -74,7 +74,18 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - run: gh pr merge --squash "$PR_URL"
+      # A pull request that fell behind main (another Dependabot update merged
+      # first) cannot be merged by this token when it touches a workflow file.
+      # Ask Dependabot to rebase; the rebased pull request runs CI again and
+      # merges then. Any other refusal fails the job so it stays visible.
+      - run: |
+          state="$(gh pr view "$PR_URL" --json mergeStateStatus --jq .mergeStateStatus)"
+          if [ "$state" = "BEHIND" ]; then
+            gh pr comment "$PR_URL" --body "@dependabot rebase"
+            echo "behind main; asked Dependabot to rebase"
+            exit 0
+          fi
+          gh pr merge --squash "$PR_URL"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
