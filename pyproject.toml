@@ -7,7 +7,7 @@ name = "octothorpe"
 version = "0.1.0"
 description = "Convert documents to Markdown with optional OCR and Microsoft MarkItDown"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "Jan Fischer" }]
 dependencies = [

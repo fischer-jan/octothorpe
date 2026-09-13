@@ -34,7 +34,7 @@ The Mac app does not queue `md` and `markdown` files. The CLI accepts them.
 
 ## Install
 
-You need Python 3.10 to 3.13. Create a virtual environment inside the project folder and install the package with OCR support:
+You need Python 3.11 to 3.13. Create a virtual environment inside the project folder and install the package with OCR support:
 
 ```bash
 python3.12 -m venv .venv
@@ -130,7 +130,7 @@ To check the UI from a terminal, set `OCTOTHORPE_SNAPSHOT=/path/out.png`. The ap
 
 ### CI and releases
 
-Every push and pull request runs the tests on Linux (Python 3.10 to 3.13) and macOS, converts a real PDF with the CLI, and builds the Mac app. Dependabot checks `uv.lock` every morning. A new MarkItDown release arrives as its own pull request; the other Python packages arrive as one grouped pull request. Those pull requests merge on their own once CI is green, so MarkItDown updates land without anyone touching the repo.
+Every push and pull request runs the tests on Linux (Python 3.11 to 3.13) and macOS, converts a real PDF with the CLI, and builds the Mac app. Dependabot checks `uv.lock` every morning. A new MarkItDown release arrives as its own pull request; the other Python packages arrive as one grouped pull request. Those pull requests merge on their own once CI is green, so MarkItDown updates land without anyone touching the repo.
 
 To publish a release, set the version in `pyproject.toml`, then push a matching tag:
 
