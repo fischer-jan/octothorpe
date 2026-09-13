@@ -26,7 +26,7 @@ jobs:
           - os: macos-latest
             python: "3.12"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python }}
@@ -46,7 +46,7 @@ jobs:
     name: Build the Mac app
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: |
           cd MacApp
           xcodebuild \
