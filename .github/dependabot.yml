@@ -1,7 +1,8 @@
 version: 2
 updates:
   # Python dependencies, pinned in uv.lock. Daily, so a new MarkItDown release
-  # shows up as a pull request the next morning and merges itself when CI passes.
+  # shows up as a pull request the next morning. Green non-majors squash-merge
+  # themselves (see .github/workflows/dependabot.yml); majors wait for a look.
   - package-ecosystem: uv
     directory: /
     schedule:

@@ -130,7 +130,7 @@ To check the UI from a terminal, set `OCTOTHORPE_SNAPSHOT=/path/out.png`. The ap
 
 ### CI and releases
 
-Every push and pull request runs the tests on Linux (Python 3.11 to 3.13) and macOS, converts a real PDF with the CLI, and builds the Mac app. Dependabot checks `uv.lock` every morning. A new MarkItDown release arrives as its own pull request; the other Python packages arrive as one grouped pull request. Those pull requests merge on their own once CI is green, so MarkItDown updates land without anyone touching the repo.
+Every push and pull request runs the tests on Linux (Python 3.11 to 3.13) and macOS, converts a real PDF with the CLI, and builds the Mac app. Dependabot checks `uv.lock` every morning. A new MarkItDown release arrives as its own pull request; the other Python packages arrive as one grouped pull request. Green non-major pull requests squash-merge on their own once CI is green. A major bump is labelled `dependency-major`, assigned, and reviewed instead of merged — see `.github/DEPENDABOT.md`.
 
 To publish a release, set the version in `pyproject.toml`, then push a matching tag:
 
