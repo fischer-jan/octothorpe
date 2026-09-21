@@ -12,7 +12,7 @@ license = { text = "MIT" }
 authors = [{ name = "Jan Fischer" }]
 dependencies = [
     "markitdown[pdf,docx,pptx,xlsx,xls]>=0.1.7",
-    "pypdf>=4.0",
+    "pypdf>=6.19.0",
 ]
 
 [project.optional-dependencies]
