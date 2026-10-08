@@ -21,7 +21,7 @@ gui = ["tkinterdnd2>=0.4"]
 ocr = [
     "rapidocr>=2.0",
     "onnxruntime>=1.16",
-    "pypdfium2>=4.0",
+    "pypdfium2>=5.14.0",
     "pillow>=10.0",
 ]
 tesseract = ["pytesseract>=0.3", "pillow>=10.0"]
