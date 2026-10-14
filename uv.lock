@@ -869,7 +869,7 @@ requires-dist = [
     { name = "pytesseract", marker = "extra == 'tesseract'", specifier = ">=0.3" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "rapidocr", marker = "extra == 'ocr'", specifier = ">=3.10.0" },
-    { name = "tkinterdnd2", marker = "extra == 'gui'", specifier = ">=0.4" },
+    { name = "tkinterdnd2", marker = "extra == 'gui'", specifier = ">=0.6.4" },
 ]
 provides-extras = ["dev", "gui", "ocr", "tesseract"]
 
@@ -1487,11 +1487,11 @@ wheels = [
 
 [[package]]
 name = "tkinterdnd2"
-version = "0.6.3"
+version = "0.6.4"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/32/e7/50713531e91cbbd546a72f3044742fa43914bdebab3e012cccb28da5eb8a/tkinterdnd2-0.6.3.tar.gz", hash = "sha256:53ed472ec08705702e087b5664f0534ca53a07a67102255f9cdc82bc5094158b", size = 735139, upload-time = "2026-09-04T16:36:38.159Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c7/bf/4e82bd618ceaba774b6a5bba225ca26675dde04e6f2c1d50ea517d217ac5/tkinterdnd2-0.6.4.tar.gz", hash = "sha256:790d1adabec647cfe18f5c2cc7ddda98b636aac539c45aa6503d234abde3c8e3", size = 736413, upload-time = "2026-10-11T10:45:39.169Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f4/86/fb62a6251863085d9e4ccf80cd0e55a19b91fab752a0b245d59aecade8f8/tkinterdnd2-0.6.3-py3-none-any.whl", hash = "sha256:50c7386302104bfb30d8e15b4cc53c0581bc51a28186ff4d7ad3cb2cc820c936", size = 816576, upload-time = "2026-09-04T16:36:36.456Z" },
+    { url = "https://files.pythonhosted.org/packages/73/a6/72313c930c923406bd55fd7d389f6fcab2064ccd76be3590ef9d584cf2cf/tkinterdnd2-0.6.4-py3-none-any.whl", hash = "sha256:4b11e0ac6febd8609faf154851d782eca4068bfa68a88ca3d3dded8294367f80", size = 816938, upload-time = "2026-10-11T10:45:37.276Z" },
 ]
 
 [[package]]
