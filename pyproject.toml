@@ -12,7 +12,7 @@ license = { text = "MIT" }
 authors = [{ name = "Jan Fischer" }]
 dependencies = [
     "markitdown[pdf,docx,pptx,xlsx,xls]>=0.1.8",
-    "pypdf>=6.20.1",
+    "pypdf>=6.21.0",
 ]
 
 [project.optional-dependencies]
@@ -22,9 +22,9 @@ ocr = [
     "rapidocr>=3.10.0",
     "onnxruntime>=1.31.0",
     "pypdfium2>=5.14.0",
-    "pillow>=10.0",
+    "pillow>=13.0.0",
 ]
-tesseract = ["pytesseract>=0.3", "pillow>=10.0"]
+tesseract = ["pytesseract>=0.3", "pillow>=13.0.0"]
 
 [project.scripts]
 octothorpe = "octothorpe.cli:main"
