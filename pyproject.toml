@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=84.2.0", "wheel"]
+requires = ["setuptools>=84.2.1", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -11,8 +11,8 @@ requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "Jan Fischer" }]
 dependencies = [
-    "markitdown[pdf,docx,pptx,xlsx,xls]>=0.1.8",
-    "pypdf>=6.21.1",
+    "markitdown[pdf,docx,pptx,xlsx,xls]>=0.1.9",
+    "pypdf>=6.21.2",
 ]
 
 [project.optional-dependencies]
