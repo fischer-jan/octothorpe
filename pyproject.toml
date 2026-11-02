@@ -12,11 +12,11 @@ license = { text = "MIT" }
 authors = [{ name = "Jan Fischer" }]
 dependencies = [
     "markitdown[pdf,docx,pptx,xlsx,xls]>=0.1.9",
-    "pypdf>=6.21.2",
+    "pypdf>=6.21.4",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=9.2.0"]
 gui = ["tkinterdnd2>=0.7.0"]
 ocr = [
     "rapidocr>=3.10.0",
